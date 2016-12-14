@@ -1,0 +1,10 @@
+<h1>Welcome, please login with your Coolpay credential</h1>
+
+<div class="well">
+  <form method="post" action="<%= auth_login_path %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="text" name="username" placeholder="Username" value="<%= @username %>">
+    <input type="text" name="api_key" placeholder="API Key" value="">
+    <input type="submit" value="login">
+  </form>
+</div>

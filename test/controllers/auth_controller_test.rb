@@ -8,11 +8,10 @@ class AuthControllerTest < ActionController::TestCase
 
   test "index shows login form" do
     get :index
-    assert_select 'form'
-    assert_select 'form[method=post]'
-    assert_select 'form[action=?]', auth_login_path
-    assert_select 'input[name=username]'
-    assert_select 'input[name=api_key]'
+    assert_select 'form[method=post][action=?]', auth_login_path do
+      assert_select 'input[name=username]'
+      assert_select 'input[name=api_key]'
+    end
   end
 
   test "should post login" do

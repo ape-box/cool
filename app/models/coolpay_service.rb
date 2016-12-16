@@ -7,45 +7,54 @@ class CoolpayService
 
   # login ----
   def login(username, api_key)
-    url = @uri + '/login'
-    params = {'username' => username, 'apikey' => api_key}
-    headers = {'content_type' => 'json', 'accept' => 'json'}
+    response = @rest_client.post(
+      @uri + '/login',
+      {'username' => username, 'apikey' => api_key},
+      {'content_type' => 'json', 'accept' => 'json'})
 
-    response = @rest_client.post(url, params, headers)
     return_body_content response, 'token'
   end
 
   # recipients ----
   def list_recipients(filter_by_name=nil)
-    url = @uri + '/recipients'
-    params = {'name' => filter_by_name}
+    response = @rest_client.get(
+      @uri + '/recipients', {
+        'params' => {'name' => filter_by_name},
+        'headers' => {'accept' => 'json'}})
 
-    response = @rest_client.get(url, {'params' => params, 'headers' => {'accept' => 'json'}})
     return_body_content response, 'recipients'
   end
 
   def create_recipient(token, recipient_name)
-    url = @uri + '/recipients'
-    params = {'recipient' => {'name' => recipient_name}}
+    response = @rest_client.post(
+      @uri + '/recipients', {
+        'params' => {'recipient' => {'name' => recipient_name}},
+        'headers' => headers_post(token)})
 
-    response = @rest_client.post(url, {'params' => params, 'headers' => headers_post(token)})
     return_body_content response, 'recipient'
   end
 
   # payments ----
   def list_payments(token)
-    url = @uri + '/payments'
-    response = @rest_client.get(url, {'headers' => headers_get(token)})
+    response = @rest_client.get(
+      @uri + '/payments',
+      {'headers' => headers_get(token)})
+
     return_body_content response, 'payments'
   end
 
   def create_payment(token, ammount_bigdecimal, currency, recipient_id)
-    raise 'Error, invalid ammount_bigdecimal' if ammount_bigdecimal.blank? || !ammount_bigdecimal.is_a?(BigDecimal)
+    raise 'Error, invalid ammount_bigdecimal' unless ammount_bigdecimal.is_a?(BigDecimal)
 
-    url = @uri + '/payments'
-    params = { 'payment' => {'amount' => ammount_bigdecimal, 'currency' => currency, 'recipient_id' => recipient_id}}
+    response = @rest_client.post(
+      @uri + '/payments', {
+        'params' => {
+          'payment' => {
+            'amount' => ammount_bigdecimal,
+            'currency' => currency,
+            'recipient_id' => recipient_id}},
+        'headers' => headers_post(token)})
 
-    response = @rest_client.post(url, {'params' => params, 'headers' => headers_post(token)})
     return_body_content response, 'payment'
   end
 

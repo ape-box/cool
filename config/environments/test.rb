@@ -41,4 +41,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.force_ssl = true
+
+  config.coolpay_uri = 'dummy'
+  config.rest_client = nil
 end

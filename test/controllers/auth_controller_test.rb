@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class AuthControllerTest < ActionController::TestCase
+
   test "should get index" do
     get :index
     assert_response :success
@@ -15,15 +16,13 @@ class AuthControllerTest < ActionController::TestCase
   end
 
   test "should post login" do
+    mock = Minitest::Mock.new
+    def mock.post(*args); Response.new('{"token": "1234567890"}'); end
+    Rails.application.config.rest_client = mock
+
     post :login
     assert_response :success
+    assert_equal '1234567890', session['token']
   end
 
-  test "wip" do
-    usr = "Pippo"
-    post :login, { username: usr }
-
-    assert_response :success
-    assert_select 'input[name=username][value=?]', usr
-  end
 end

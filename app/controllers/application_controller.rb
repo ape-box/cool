@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def coolpay
-    CoolpayService.new Rails.application.config.coolpay_uri, RestClient
+    CoolpayService.new Rails.application.config.coolpay_uri, Rails.application.config.rest_client
   end
 
 end

@@ -9,3 +9,10 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+class Response
+  attr_accessor :body
+  def initialize(json_content)
+    @body = json_content
+  end
+end

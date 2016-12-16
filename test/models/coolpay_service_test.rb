@@ -81,10 +81,3 @@ class CoolpayServiceTest < ActiveSupport::TestCase
     assert_equal({"id" => "123", "amount" => "10.5", "currency" => "GBP", "recipient_id" => "456", "status" => "processing"}, recipient)
   end
 end
-
-class Response
-  attr_accessor :body
-  def initialize(json_content)
-    @body = json_content
-  end
-end

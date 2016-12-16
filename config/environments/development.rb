@@ -44,4 +44,5 @@ Rails.application.configure do
   config.web_console.whitelisted_ips = '192.168.0.0/16'
 
   config.coolpay_uri = 'https://private-anon-9fd2e34449-coolpayapi.apiary-mock.com/api'
+  config.rest_client = RestClient
 end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RoutesTest < ActionController::TestCase
+class RoutesTest < ActionDispatch::IntegrationTest
   test "static routes" do
     assert_routing({ method: :get, path: '/' }, { controller: 'static', action: 'index' })
   end

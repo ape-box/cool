@@ -1,8 +1,8 @@
 class CoolpayService
 
-  def initialize(uri=nil, rest_client=nil)
-    @uri = uri || 'https://private-anon-9fd2e34449-coolpayapi.apiary-mock.com/api'#'https://coolpay.herokuapp.com/api'
-    @rest_client = rest_client || RestClient
+  def initialize(uri, rest_client)
+    @uri = uri
+    @rest_client = rest_client
   end
 
   # login ----

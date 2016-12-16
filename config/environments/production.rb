@@ -76,4 +76,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.coolpay_uri = 'https://coolpay.herokuapp.com/api'
 end

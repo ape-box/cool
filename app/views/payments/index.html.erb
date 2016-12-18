@@ -1,0 +1,40 @@
+
+<h2>Payments</h2>
+
+<table id="payments">
+  <thead>
+    <tr>
+      <th>Recipient</th>
+      <th>Amount</th>
+      <th>Currency</th>
+      <th>Status</th>
+      <th>Payment Id</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @payments.each do |payment| %>
+    <tr>
+      <td><%= payment['recipient'] %></td>
+      <td><%= payment['amount'] %></td>
+      <td><%= payment['currency'] %></td>
+      <td><%= payment['status'] %></td>
+      <td><%= payment['id'] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<form id="new_payment" method="post" action="<%= payments_path %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="text" name="amount" placeholder="Amount">
+  <select name="currency">
+    <option value="GBP">GBP</option>
+  </select>
+  <select name="recipient_id">
+    <% @recipients.each do |recipient| %>
+      <option <%= recipient['id'] %>><%= recipient['name'] %></option>
+    <% end %>
+  </select>
+  <input type="submit" value="Create">
+</form>

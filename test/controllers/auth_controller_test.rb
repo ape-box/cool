@@ -21,8 +21,18 @@ class AuthControllerTest < ActionController::TestCase
     Rails.application.config.rest_client = mock
 
     post :login
-    assert_response :success
+    assert_response :redirect
     assert_equal '1234567890', session['token']
+  end
+
+  test "login should redirect to recipients list" do
+    mock = Minitest::Mock.new
+    def mock.post(*args); Response.new('{"token": "1234567890"}'); end
+    Rails.application.config.rest_client = mock
+
+    post :login
+    assert_response :redirect
+    assert_redirected_to recipients_path
   end
 
 end

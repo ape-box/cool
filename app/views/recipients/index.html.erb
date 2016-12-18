@@ -1,0 +1,14 @@
+
+<h2>Recipients</h2>
+
+<table id="recipients">
+  <% @recipients.each do |recipient| %>
+    <tr><td><%= recipient['name'] %></td></tr>
+  <% end %>
+</table>
+
+<form id="new_recipient" method="post" action="<%= recipients_path %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="text" name="name" placeholder="Recipient's Name">
+  <input type="submit" value="Create">
+</form>

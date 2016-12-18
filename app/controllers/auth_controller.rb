@@ -10,9 +10,7 @@ class AuthController < ApplicationController
     token = coolpay.login params['username'], params['api_key']
     session['token'] = token
 
-    @token = session['token']
-
-    render 'index'
+    redirect_to recipients_path
   end
 
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'static#index'
+  get 'dashboard' => 'static#dashboard'
 
   get 'auth' => 'auth#index'
   post 'auth/login' => 'auth#login'
